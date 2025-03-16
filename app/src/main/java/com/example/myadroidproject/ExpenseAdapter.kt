@@ -1,5 +1,6 @@
 package com.example.myadroidproject
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,6 +35,10 @@ class ExpenseAdapter(private var expenses:MutableList<Expense>):RecyclerView.Ada
             deleteButton.setOnClickListener{
                 expenses.removeAt(position)
                 notifyItemRemoved(position)
+            }
+            val detailsButton=findViewById<Button>(R.id.detailButton)
+            detailsButton.setOnClickListener {
+                val intent=Intent(holder.itemView.context,ExpenseDetailsActivity::class.java)
             }
         }
     }
