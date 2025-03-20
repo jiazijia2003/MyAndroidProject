@@ -35,25 +35,25 @@
         android:ems="10"
         android:inputType="text"
         android:text="Amount"
-        app:layout_constraintBottom_toTopOf="@+id/dateText"
+        app:layout_constraintBottom_toTopOf="@+id/dateButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nameText" />
 
-    <EditText
-        android:id="@+id/dateText"
+
+
+    <Button
+        android:id="@+id/dateButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="71dp"
+        android:layout_marginStart="57dp"
+        android:layout_marginTop="-16dp"
+        android:layout_marginEnd="109dp"
         android:layout_marginBottom="1dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Date"
+        android:text="Select a date"
         app:layout_constraintBottom_toTopOf="@+id/recyclerView"
         app:layout_constraintEnd_toStartOf="@+id/addButton"
-        app:layout_constraintHorizontal_bias="0.023"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/amountText" />
 
@@ -61,8 +61,8 @@
         android:id="@+id/addButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="148dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="16dp"
         android:text="Add Expense"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -77,6 +77,24 @@
         android:layout_marginBottom="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addButton"
+        app:layout_constraintVertical_bias="0.965" />
+
+    <TextView
+        android:id="@+id/tvDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="94dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="41dp"
+        android:layout_marginBottom="17dp"
+        android:text="no date select"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/dateButton"
         app:layout_constraintTop_toBottomOf="@+id/addButton" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

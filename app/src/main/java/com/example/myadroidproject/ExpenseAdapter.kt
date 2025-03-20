@@ -30,7 +30,8 @@ class ExpenseAdapter(private var expenses:MutableList<Expense>):RecyclerView.Ada
 
             val tvAmount = findViewById<TextView>(R.id.tvAmount)
             tvAmount.text= expenses[position].amount.toString()
-
+            val tvDate=findViewById<TextView>(R.id.tvDate)
+            tvDate.text=expenses[position].date
             val deleteButton=findViewById<Button>(R.id.deleteButton)
             deleteButton.setOnClickListener{
                 expenses.removeAt(position)
