@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.text.TextUtils.replace
 import android.util.Log
 import android.widget.Button
 import android.widget.DatePicker
@@ -25,6 +26,9 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener{
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 //https://www.manulife.ca/personal/plan-and-learn/healthy-finances/financial-planning/ten-simple-money-management-tips.html
+        addFragmentH()
+
+        addFragmentF()
         val name=findViewById<EditText>(R.id.nameText)
         val amount=findViewById<EditText>(R.id.amountText)
        // val date=findViewById<EditText>(R.id.dateText)
@@ -107,4 +111,21 @@ val tipButton=findViewById<Button>(R.id.tipButton)
             DateFormat.getDateInstance(DateFormat.FULL).format(mCalendar.getTime())
         tvDate?.setText(selectedDate)
     }
+    //
+//    val fragment = ProductListFragment()
+//    supportFragmentManager
+//    .beginTransaction()
+//    .add(R.id.main_content, fragment)
+//    .commit()   from documentation
+    private fun addFragmentH(){
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentheader,HeaderFragment())
+            .commit()
+    }
+
+private fun addFragmentF(){
+    supportFragmentManager.beginTransaction()
+        .replace(R.id.fragmentfooter,FooterFragment())
+        .commit()
+}
 }
