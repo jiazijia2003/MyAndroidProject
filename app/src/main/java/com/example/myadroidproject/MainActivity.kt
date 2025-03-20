@@ -17,6 +17,7 @@ import java.util.Calendar
 
 class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener{
     lateinit var tvDate: TextView
+    private lateinit var adapter: ExpenseAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -38,7 +39,7 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener{
         )
 //mDatePickerDialogFragment = new tutorials.droid.datepicker.DatePicker();
 //                mDatePickerDialogFragment.show(getSupportFragmentManager(), "DATE PICK");
-        val adapter=ExpenseAdapter(expenseList)
+        adapter=ExpenseAdapter(expenseList,this,this)
         recyclerView.adapter=adapter
         recyclerView.layoutManager=LinearLayoutManager(this)
         btPickDate.setOnClickListener{
