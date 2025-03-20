@@ -1,6 +1,8 @@
 package com.example.myadroidproject
 
 import android.app.DatePickerDialog
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -22,7 +24,7 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener{
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
-
+//https://www.manulife.ca/personal/plan-and-learn/healthy-finances/financial-planning/ten-simple-money-management-tips.html
         val name=findViewById<EditText>(R.id.nameText)
         val amount=findViewById<EditText>(R.id.amountText)
        // val date=findViewById<EditText>(R.id.dateText)
@@ -33,9 +35,8 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener{
        // val deleteButton=findViewById<Button>(R.id.deleteButton)
         var expenseList= mutableListOf(
             Expense("Clothes","50.99","2023-01-01"),
-            Expense("rental","600.0","2023-01-01"),
-            Expense("dinner","20.99","2023-01-01"),
-            Expense("pet","200.99","2023-01-01")
+            Expense("rental","600.0","2023-01-01")
+
         )
 //mDatePickerDialogFragment = new tutorials.droid.datepicker.DatePicker();
 //                mDatePickerDialogFragment.show(getSupportFragmentManager(), "DATE PICK");
@@ -60,8 +61,14 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener{
             name.text.clear()
             amount.text.clear()
         }
-
-
+val tipButton=findViewById<Button>(R.id.tipButton)
+        tipButton.setOnClickListener {
+            var url =
+                "https://www.manulife.ca/personal/plan-and-learn/healthy-finances/financial-planning/ten-simple-money-management-tips.html"
+            var intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse(url)
+            startActivity(intent)
+        }
 
     }
 
