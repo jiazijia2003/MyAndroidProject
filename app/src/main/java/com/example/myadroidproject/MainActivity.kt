@@ -4,6 +4,8 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.TextUtils.replace
 import android.util.Log
 import android.widget.Button
@@ -20,7 +22,7 @@ import java.util.Calendar
 
 class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener{
     lateinit var tvDate: TextView
-    private lateinit var footerFragment: FooterFragment
+   private lateinit var footerFragment: FooterFragment
     private lateinit var adapter: ExpenseAdapter
     var expenseList= mutableListOf(
         Expense("Clothes","50.99","2023-01-01"),
@@ -31,9 +33,9 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener{
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 //https://www.manulife.ca/personal/plan-and-learn/healthy-finances/financial-planning/ten-simple-money-management-tips.html
-        addFragmentH()
-        footerFragment =FooterFragment()
-        addFragmentF()
+       // addFragmentH()
+    //   footerFragment =FooterFragment()
+     //   addFragmentF()
 
         val name=findViewById<EditText>(R.id.nameText)
         val amount=findViewById<EditText>(R.id.amountText)
@@ -62,10 +64,12 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener{
             }else{
             val expense=Expense(expenseName,expenseAmount,tvDate.text.toString())
             expenseList.add(expense)
+
             adapter.notifyItemInserted(expenseList.size-1)
             }
             name.text.clear()
             amount.text.clear()
+            showTotal()
         }
 val tipButton=findViewById<Button>(R.id.tipButton)
         tipButton.setOnClickListener {
@@ -75,8 +79,14 @@ val tipButton=findViewById<Button>(R.id.tipButton)
             intent.data = Uri.parse(url)
             startActivity(intent)
         }
-        showTotal()
-
+        addFragmentH()
+        footerFragment =FooterFragment()
+        addFragmentF()
+ //   showTotal()//always crash cuz make the total instance before the footer fragment done
+//Handler(Looper.getMainLooper()).postDelayed({
+//   // do something
+//}, 1000)
+Handler(Looper.getMainLooper()).postDelayed({showTotal()},500)
     }
 
 
@@ -127,11 +137,13 @@ val tipButton=findViewById<Button>(R.id.tipButton)
     }
 
 private fun addFragmentF(){
-    footerFragment = FooterFragment()
+   footerFragment = FooterFragment()
     supportFragmentManager.beginTransaction()
         .replace(R.id.fragmentfooter,footerFragment)
-        .commit()
+        .commitNow()
     supportFragmentManager.executePendingTransactions()
+
+
 }
 
     fun showTotal() {
@@ -139,6 +151,8 @@ private fun addFragmentF(){
         for (i in expenseList) {
             total += i.amount.toDoubleOrNull() ?:0.0
         }
-        footerFragment.getTotal(total)
+//        val footer=supportFragmentManager.findFragmentById(R.id.fragmentfooter) as? FooterFragment
+//        footer?.getTotal(total)
+       footerFragment.getTotal(total)
     }
 }
