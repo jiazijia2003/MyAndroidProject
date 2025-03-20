@@ -38,6 +38,7 @@ class ExpenseAdapter(private var expenseList:MutableList<Expense>,private var co
             deleteButton.setOnClickListener{
                 expenseList.removeAt(position)
                 //notifyItemRemoved(position)
+                activity.showTotal()
                 notifyDataSetChanged()
             }
             val detailsButton=findViewById<Button>(R.id.detailButton)

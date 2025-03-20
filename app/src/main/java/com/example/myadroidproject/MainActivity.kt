@@ -20,15 +20,21 @@ import java.util.Calendar
 
 class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener{
     lateinit var tvDate: TextView
+    private lateinit var footerFragment: FooterFragment
     private lateinit var adapter: ExpenseAdapter
+    var expenseList= mutableListOf(
+        Expense("Clothes","50.99","2023-01-01"),
+        Expense("rental","600.0","2023-01-01")
+    )
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 //https://www.manulife.ca/personal/plan-and-learn/healthy-finances/financial-planning/ten-simple-money-management-tips.html
         addFragmentH()
-
+        footerFragment =FooterFragment()
         addFragmentF()
+
         val name=findViewById<EditText>(R.id.nameText)
         val amount=findViewById<EditText>(R.id.amountText)
        // val date=findViewById<EditText>(R.id.dateText)
@@ -37,11 +43,7 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener{
         val addButton=findViewById<Button>(R.id.addButton)
         val recyclerView=findViewById<RecyclerView>(R.id.recyclerView)
        // val deleteButton=findViewById<Button>(R.id.deleteButton)
-        var expenseList= mutableListOf(
-            Expense("Clothes","50.99","2023-01-01"),
-            Expense("rental","600.0","2023-01-01")
 
-        )
 //mDatePickerDialogFragment = new tutorials.droid.datepicker.DatePicker();
 //                mDatePickerDialogFragment.show(getSupportFragmentManager(), "DATE PICK");
         adapter=ExpenseAdapter(expenseList,this,this)
@@ -73,6 +75,7 @@ val tipButton=findViewById<Button>(R.id.tipButton)
             intent.data = Uri.parse(url)
             startActivity(intent)
         }
+        showTotal()
 
     }
 
@@ -124,8 +127,18 @@ val tipButton=findViewById<Button>(R.id.tipButton)
     }
 
 private fun addFragmentF(){
+    footerFragment = FooterFragment()
     supportFragmentManager.beginTransaction()
-        .replace(R.id.fragmentfooter,FooterFragment())
+        .replace(R.id.fragmentfooter,footerFragment)
         .commit()
+    supportFragmentManager.executePendingTransactions()
 }
+
+    fun showTotal() {
+        var total = 0.0
+        for (i in expenseList) {
+            total += i.amount.toDoubleOrNull() ?:0.0
+        }
+        footerFragment.getTotal(total)
+    }
 }
