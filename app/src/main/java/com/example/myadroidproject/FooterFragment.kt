@@ -15,7 +15,10 @@ private lateinit var totalTV:TextView
             savedInstanceState: Bundle?
         ): View? {
             val view= inflater.inflate(R.layout.fragment_footer, container, false)
-             totalTV= view.findViewById<TextView>(R.id.footerTV)
+//             totalTV= view.findViewById<TextView>(R.id.footerTV)
+//            val total=arguments?.getString("Total")?:"0.0"
+//            view.findViewById<TextView>(R.id.footerTV).text=total
+            totalTV= view.findViewById<TextView>(R.id.footerTV)
             return view
         }
 
@@ -23,9 +26,10 @@ private lateinit var totalTV:TextView
 
     //update the total
 
-    @SuppressLint("SetTextI18n")
     fun getTotal(total:Double){
+
         totalTV.text="Total Expenses: ${total}"
+
 
     }
 }

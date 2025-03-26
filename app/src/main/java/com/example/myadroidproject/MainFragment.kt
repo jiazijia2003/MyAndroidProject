@@ -6,6 +6,8 @@ import android.content.Intent
 import android.icu.util.Calendar
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -30,6 +32,7 @@ import java.util.Locale
 private const val FILE_NAME = "expenses.txt"
 class MainFragment:Fragment(){
     private lateinit var recyclerView: RecyclerView
+    private lateinit var footerFragment: FooterFragment
     private lateinit var expenseAdapter: ExpenseAdapter
     private lateinit var name:EditText
     private lateinit var amount:EditText
@@ -37,6 +40,7 @@ class MainFragment:Fragment(){
     private lateinit var addBtn:Button
     private lateinit var tipBtn:Button
     private lateinit var dateBtn:Button
+   // var total:Double=0.0
     private val calendar = Calendar.getInstance()
     private val expenseList= mutableListOf<Expense>()
     override fun onCreateView(
@@ -47,6 +51,9 @@ class MainFragment:Fragment(){
 //        return super.onCreateView(inflater, container, savedInstanceState)
 
         val view = inflater.inflate(R.layout.fragment_main, container, false)
+        //total=arguments?.getDouble("Total")?:0.0
+     //   Handler(Looper.getMainLooper()).postDelayed({showTotal()},500)
+        footerFragment =FooterFragment()
         recyclerView=view.findViewById(R.id.recyclerView)
         recyclerView.layoutManager=LinearLayoutManager(requireContext())
         expenseAdapter= ExpenseAdapter(expenseList,requireContext(),this)
@@ -56,7 +63,7 @@ class MainFragment:Fragment(){
         date=view.findViewById(R.id.date)
         addBtn=view.findViewById(R.id.buttonAdd)
         tipBtn=view.findViewById(R.id.buttonTip)
-
+        footerFragment =FooterFragment()
         //start give functions to buttons
         addBtn.setOnClickListener{
             val expenseName=name.text.toString()
@@ -70,6 +77,8 @@ class MainFragment:Fragment(){
 
                 expenseAdapter.notifyItemInserted(expenseList.size-1)
                 saveExpensesToFile(requireContext(),expenseList)
+                showTotal()
+                Handler(Looper.getMainLooper()).postDelayed({showTotal()},500)
             }
             name.text.clear()
             amount.text.clear()
@@ -156,5 +165,19 @@ class MainFragment:Fragment(){
         }
         findNavController().navigate(R.id.action_mainFragment_to_details,bundle)
     }
+    fun showTotal() {
+        var total = 1.1
+        for (i in expenseList) {
+            total += i.amount.toDoubleOrNull() ?:0.0
+        }
 
+        footerFragment.getTotal(total)
+    }
+
+
+
+//    override fun onStart() {
+//        super.onStart()
+//        showTotal()
+//    }
 }
