@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainFragment"
+    tools:ignore="ExtraText">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.myadroidproject.MainFragment"
+        android:label="Expense List"
+        tools:layout="@layout/fragment_main">
+
+        <!-- Action: Navigate to TaskDetailsFragment -->
+        <action
+            android:id="@+id/action_mainFragment_to_details"
+            app:destination="@id/details" />
+
+    </fragment>
+    <fragment
+    android:id="@+id/details"
+    android:name="com.example.myadroidproject.ExpenseDetailsFragment"
+    android:label="Expense Details"
+    tools:layout="@layout/fragement_details" />
+    <action
+        android:id="@+id/action_details_to_mainFragment"
+        app:destination="@id/mainFragment" />
+
+
+</navigation>

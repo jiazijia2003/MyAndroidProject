@@ -37,56 +37,56 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener{
     //   footerFragment =FooterFragment()
      //   addFragmentF()
 
-        val name=findViewById<EditText>(R.id.nameText)
-        val amount=findViewById<EditText>(R.id.amountText)
-       // val date=findViewById<EditText>(R.id.dateText)
-        val btPickDate=findViewById<Button>(R.id.dateButton);
-        tvDate=findViewById<TextView>(R.id.tvDate)
-        val addButton=findViewById<Button>(R.id.addButton)
-        val recyclerView=findViewById<RecyclerView>(R.id.recyclerView)
-       // val deleteButton=findViewById<Button>(R.id.deleteButton)
-
-//mDatePickerDialogFragment = new tutorials.droid.datepicker.DatePicker();
-//                mDatePickerDialogFragment.show(getSupportFragmentManager(), "DATE PICK");
-        adapter=ExpenseAdapter(expenseList,this,this)
-        recyclerView.adapter=adapter
-        recyclerView.layoutManager=LinearLayoutManager(this)
-        btPickDate.setOnClickListener{
-            val datePicker=com.example.myadroidproject.DatePicker()
-            datePicker.show(supportFragmentManager,"DATE PICK")
-        }
-        addButton.setOnClickListener{
-            val expenseName=name.text.toString()
-            val expenseAmount=amount.text.toString()
-
-            if(expenseName.isEmpty()||expenseAmount.isEmpty()||expenseAmount.toDoubleOrNull()==null){
-                Toast.makeText(this,"Invalid input",Toast.LENGTH_SHORT).show()
-            }else{
-            val expense=Expense(expenseName,expenseAmount,tvDate.text.toString())
-            expenseList.add(expense)
-
-            adapter.notifyItemInserted(expenseList.size-1)
-            }
-            name.text.clear()
-            amount.text.clear()
-            showTotal()
-        }
-val tipButton=findViewById<Button>(R.id.tipButton)
-        tipButton.setOnClickListener {
-            var url =
-                "https://www.manulife.ca/personal/plan-and-learn/healthy-finances/financial-planning/ten-simple-money-management-tips.html"
-            var intent = Intent(Intent.ACTION_VIEW)
-            intent.data = Uri.parse(url)
-            startActivity(intent)
-        }
-        addFragmentH()
-        footerFragment =FooterFragment()
-        addFragmentF()
- //   showTotal()//always crash cuz make the total instance before the footer fragment done
-//Handler(Looper.getMainLooper()).postDelayed({
-//   // do something
-//}, 1000)
-Handler(Looper.getMainLooper()).postDelayed({showTotal()},500)
+//        val name=findViewById<EditText>(R.id.nameText)
+//        val amount=findViewById<EditText>(R.id.amountText)
+//       // val date=findViewById<EditText>(R.id.dateText)
+//        val btPickDate=findViewById<Button>(R.id.dateButton);
+//        tvDate=findViewById<TextView>(R.id.tvDate)
+//        val addButton=findViewById<Button>(R.id.addButton)
+//        val recyclerView=findViewById<RecyclerView>(R.id.recyclerView)
+//       // val deleteButton=findViewById<Button>(R.id.deleteButton)
+//
+////mDatePickerDialogFragment = new tutorials.droid.datepicker.DatePicker();
+////                mDatePickerDialogFragment.show(getSupportFragmentManager(), "DATE PICK");
+//        adapter=ExpenseAdapter(expenseList,this,this)
+//        recyclerView.adapter=adapter
+//        recyclerView.layoutManager=LinearLayoutManager(this)
+//        btPickDate.setOnClickListener{
+//            val datePicker=com.example.myadroidproject.DatePicker()
+//            datePicker.show(supportFragmentManager,"DATE PICK")
+//        }
+//        addButton.setOnClickListener{
+//            val expenseName=name.text.toString()
+//            val expenseAmount=amount.text.toString()
+//
+//            if(expenseName.isEmpty()||expenseAmount.isEmpty()||expenseAmount.toDoubleOrNull()==null){
+//                Toast.makeText(this,"Invalid input",Toast.LENGTH_SHORT).show()
+//            }else{
+//            val expense=Expense(expenseName,expenseAmount,tvDate.text.toString())
+//            expenseList.add(expense)
+//
+//            adapter.notifyItemInserted(expenseList.size-1)
+//            }
+//            name.text.clear()
+//            amount.text.clear()
+//            showTotal()
+//        }
+//val tipButton=findViewById<Button>(R.id.tipButton)
+//        tipButton.setOnClickListener {
+//            var url =
+//                "https://www.manulife.ca/personal/plan-and-learn/healthy-finances/financial-planning/ten-simple-money-management-tips.html"
+//            var intent = Intent(Intent.ACTION_VIEW)
+//            intent.data = Uri.parse(url)
+//            startActivity(intent)
+//        }
+//        addFragmentH()
+//        footerFragment =FooterFragment()
+//        addFragmentF()
+// //   showTotal()//always crash cuz make the total instance before the footer fragment done
+////Handler(Looper.getMainLooper()).postDelayed({
+////   // do something
+////}, 1000)
+//Handler(Looper.getMainLooper()).postDelayed({showTotal()},500)
     }
 
 

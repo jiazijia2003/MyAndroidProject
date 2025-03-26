@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 
-class ExpenseAdapter(private var expenseList:MutableList<Expense>,private var context: Context,private val activity: MainActivity):RecyclerView.Adapter<RecycleViewHolder>(){
+class ExpenseAdapter(private var expenseList:MutableList<Expense>,private var context: Context,private val activity: MainFragment):RecyclerView.Adapter<RecycleViewHolder>(){
 
    //inner  class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
 //interface ExpenseListener{
@@ -41,8 +41,9 @@ class ExpenseAdapter(private var expenseList:MutableList<Expense>,private var co
             deleteButton.setOnClickListener{
                 expenseList.removeAt(position)
                 //notifyItemRemoved(position)
-                activity.showTotal()
+               // activity.showTotal()
                 notifyDataSetChanged()
+                activity.saveExpensesToFile(context,expenseList)
             }
             val detailsButton=findViewById<Button>(R.id.detailButton)
             detailsButton.setOnClickListener {
@@ -51,11 +52,8 @@ class ExpenseAdapter(private var expenseList:MutableList<Expense>,private var co
 //                //            // Start next activity
 //                //            startActivity(intent)
                 //use intent to pass the data
-                val expense=expenseList[position]
-                val intent=Intent(context,DetailPageActivity::class.java)
-
-                intent.putExtra("Detail", expense)
-                context.startActivity(intent)
+//
+                activity.getDetails(position)
             }
         }
     }
