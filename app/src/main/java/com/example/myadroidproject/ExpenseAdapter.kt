@@ -13,7 +13,10 @@ import androidx.recyclerview.widget.RecyclerView
 class ExpenseAdapter(private var expenseList:MutableList<Expense>,private var context: Context,private val activity: MainActivity):RecyclerView.Adapter<RecycleViewHolder>(){
 
    //inner  class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
-
+//interface ExpenseListener{
+//       fun onEditClick(expense: Expense)
+//       fun onDeleteClick(expense: Expense)
+//}
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecycleViewHolder {
