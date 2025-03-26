@@ -51,9 +51,10 @@ class MainFragment:Fragment(){
 //        return super.onCreateView(inflater, container, savedInstanceState)
 
         val view = inflater.inflate(R.layout.fragment_main, container, false)
+
         //total=arguments?.getDouble("Total")?:0.0
      //   Handler(Looper.getMainLooper()).postDelayed({showTotal()},500)
-        footerFragment =FooterFragment()
+
         recyclerView=view.findViewById(R.id.recyclerView)
         recyclerView.layoutManager=LinearLayoutManager(requireContext())
         expenseAdapter= ExpenseAdapter(expenseList,requireContext(),this)
@@ -77,11 +78,13 @@ class MainFragment:Fragment(){
 
                 expenseAdapter.notifyItemInserted(expenseList.size-1)
                 saveExpensesToFile(requireContext(),expenseList)
-                showTotal()
-                Handler(Looper.getMainLooper()).postDelayed({showTotal()},500)
+
+
             }
             name.text.clear()
             amount.text.clear()
+            showTotal()
+            Handler(Looper.getMainLooper()).postDelayed({showTotal()},500)
         }
         tipBtn.setOnClickListener{
                 val url =
@@ -166,12 +169,7 @@ class MainFragment:Fragment(){
         findNavController().navigate(R.id.action_mainFragment_to_details,bundle)
     }
     fun showTotal() {
-        var total = 1.1
-        for (i in expenseList) {
-            total += i.amount.toDoubleOrNull() ?:0.0
-        }
-
-        footerFragment.getTotal(total)
+        (activity as MainActivity).showTotal(expenseList)
     }
 
 

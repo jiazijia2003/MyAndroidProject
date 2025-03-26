@@ -146,7 +146,7 @@ private fun addFragmentF(){
 
 }
 
-    fun showTotal() {
+    fun showTotal(expenseList:List<Expense>) {
         var total = 0.0
         for (i in expenseList) {
             total += i.amount.toDoubleOrNull() ?:0.0
