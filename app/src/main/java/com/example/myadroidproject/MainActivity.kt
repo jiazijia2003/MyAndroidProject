@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener{
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
+        footerFragment = supportFragmentManager.findFragmentById(R.id.fragmentfooter) as FooterFragment
 //https://www.manulife.ca/personal/plan-and-learn/healthy-finances/financial-planning/ten-simple-money-management-tips.html
        // addFragmentH()
     //   footerFragment =FooterFragment()
@@ -146,11 +147,11 @@ private fun addFragmentF(){
 
 }
 
-    fun showTotal(expenseList:List<Expense>) {
-        var total = 0.0
-        for (i in expenseList) {
-            total += i.amount.toDoubleOrNull() ?:0.0
-        }
+    fun updateTotal(total:Double) {
+//        var total = 0.0
+//        for (i in expenseList) {
+//            total += i.amount.toDoubleOrNull() ?:0.0
+//        }
 //        val footer=supportFragmentManager.findFragmentById(R.id.fragmentfooter) as? FooterFragment
 //        footer?.getTotal(total)
        footerFragment.getTotal(total)

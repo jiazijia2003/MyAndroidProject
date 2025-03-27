@@ -51,9 +51,9 @@ class MainFragment:Fragment(){
 //        return super.onCreateView(inflater, container, savedInstanceState)
 
         val view = inflater.inflate(R.layout.fragment_main, container, false)
-
+       // view.postDelayed({ showTotal() }, 300)
         //total=arguments?.getDouble("Total")?:0.0
-     //   Handler(Looper.getMainLooper()).postDelayed({showTotal()},500)
+        Handler(Looper.getMainLooper()).postDelayed({showTotal()},500)
 
         recyclerView=view.findViewById(R.id.recyclerView)
         recyclerView.layoutManager=LinearLayoutManager(requireContext())
@@ -64,7 +64,7 @@ class MainFragment:Fragment(){
         date=view.findViewById(R.id.date)
         addBtn=view.findViewById(R.id.buttonAdd)
         tipBtn=view.findViewById(R.id.buttonTip)
-        footerFragment =FooterFragment()
+       // footerFragment =FooterFragment()
         //start give functions to buttons
         addBtn.setOnClickListener{
             val expenseName=name.text.toString()
@@ -83,8 +83,9 @@ class MainFragment:Fragment(){
             }
             name.text.clear()
             amount.text.clear()
-            showTotal()
-            Handler(Looper.getMainLooper()).postDelayed({showTotal()},500)
+           showTotal()
+//            Handler(Looper.getMainLooper()).postDelayed({showTotal()},500)
+          //  view.postDelayed({ showTotal() }, 300)
         }
         tipBtn.setOnClickListener{
                 val url =
@@ -169,7 +170,15 @@ class MainFragment:Fragment(){
         findNavController().navigate(R.id.action_mainFragment_to_details,bundle)
     }
     fun showTotal() {
-        (activity as MainActivity).showTotal(expenseList)
+        val total = expenseList.sumOf { it.amount.toDoubleOrNull() ?: 0.0 }
+
+        (activity as? MainActivity)?.updateTotal(total)
+//        footerFragment?.getTotal(total)
+//        if (footerFragment == null) {
+//            Log.d("MainFragment", "footerFragment 是 null，无法调用getTotal！")
+//        } else {
+//            footerFragment.getTotal(total)
+//        }
     }
 
 

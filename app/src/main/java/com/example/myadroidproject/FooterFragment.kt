@@ -18,7 +18,7 @@ private lateinit var totalTV:TextView
 //             totalTV= view.findViewById<TextView>(R.id.footerTV)
 //            val total=arguments?.getString("Total")?:"0.0"
 //            view.findViewById<TextView>(R.id.footerTV).text=total
-            totalTV= view.findViewById<TextView>(R.id.footerTV)
+            totalTV= view.findViewById(R.id.footerTV)
             return view
         }
 
