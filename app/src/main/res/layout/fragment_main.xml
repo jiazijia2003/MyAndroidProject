@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
 
     <EditText
@@ -16,7 +17,7 @@
         android:layout_marginBottom="623dp"
         android:ems="10"
         android:inputType="text"
-        android:text="Expense Name"
+        android:hint="Expense Name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -34,7 +35,7 @@
         android:layout_marginBottom="565dp"
         android:ems="10"
         android:inputType="text"
-        android:text="Expense Amount"
+        android:hint="Expense Amount"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
