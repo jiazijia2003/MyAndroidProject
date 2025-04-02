@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.icu.util.Calendar
+import android.icu.util.Currency
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
@@ -12,8 +13,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.EditText
+import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -39,7 +43,9 @@ class MainFragment:Fragment(){
     private lateinit var date:TextView
     private lateinit var addBtn:Button
     private lateinit var tipBtn:Button
-    private lateinit var dateBtn:Button
+    //private lateinit var dateBtn:Button
+    private lateinit var currencySpinner: Spinner
+    private lateinit var checkbox:CheckBox
    // var total:Double=0.0
     private val calendar = Calendar.getInstance()
     private val expenseList= mutableListOf<Expense>()
@@ -64,16 +70,35 @@ class MainFragment:Fragment(){
         date=view.findViewById(R.id.date)
         addBtn=view.findViewById(R.id.buttonAdd)
         tipBtn=view.findViewById(R.id.buttonTip)
+        currencySpinner=view.findViewById(R.id.currencySpinner)
+        checkbox=view.findViewById(R.id.checkBox)
+        //populate the currency spinner
+        val currencies=Currency.getAvailableCurrencies().map { it.currencyCode }.sorted()
+        val adapter=ArrayAdapter(requireContext(),android.R.layout.simple_spinner_item,currencies)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        currencySpinner.adapter=adapter
+        val defaultIndex = currencies.indexOfFirst { it.toString() == "CAD" }
+
+        if (defaultIndex >= 0) {
+            currencySpinner.setSelection(defaultIndex)
+        }
        // footerFragment =FooterFragment()
         //start give functions to buttons
         addBtn.setOnClickListener{
             val expenseName=name.text.toString()
             val expenseAmount=amount.text.toString()
-
+            val currency=Currency.getInstance(currencySpinner.selectedItem.toString())
+            val isNeedConverted=checkbox.isChecked
+            val convertedValue=0.0
+            if(isNeedConverted){
+                convertedValue=
+            }else{
+                convertedValue=expenseAmount.toDouble()
+            }
             if(expenseName.isEmpty()||expenseAmount.isEmpty()||expenseAmount.toDoubleOrNull()==null){
               Toast.makeText(requireContext(),"Invalid input",Toast.LENGTH_SHORT).show()
             }else{
-                val expense=Expense(expenseName,expenseAmount,date.text.toString())
+                val expense=Expense(expenseName,expenseAmount,date.text.toString(),currency,isNeedConverted)
                 expenseList.add(expense)
 
                 expenseAdapter.notifyItemInserted(expenseList.size-1)

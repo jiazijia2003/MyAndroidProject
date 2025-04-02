@@ -24,10 +24,10 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener{
     lateinit var tvDate: TextView
    private lateinit var footerFragment: FooterFragment
     private lateinit var adapter: ExpenseAdapter
-    var expenseList= mutableListOf(
-        Expense("Clothes","50.99","2023-01-01"),
-        Expense("rental","600.0","2023-01-01")
-    )
+//    var expenseList= mutableListOf(
+//        Expense("Clothes","50.99","2023-01-01"),
+//        Expense("rental","600.0","2023-01-01")
+//    )
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
