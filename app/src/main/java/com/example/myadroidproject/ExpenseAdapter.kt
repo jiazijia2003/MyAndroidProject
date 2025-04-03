@@ -37,6 +37,9 @@ class ExpenseAdapter(private var expenseList:MutableList<Expense>,private var co
             tvAmount.text= expenseList[position].amount.toString()
             val tvDate=findViewById<TextView>(R.id.tvDate)
             tvDate.text=expenseList[position].date
+
+            val convertedCost=findViewById<TextView>(R.id.tvConverted)
+            convertedCost.text= expenseList[position].convertedCost.toString()
             val deleteButton=findViewById<Button>(R.id.deleteButton)
             deleteButton.setOnClickListener{
                 expenseList.removeAt(position)

@@ -36,6 +36,7 @@ import java.io.FileNotFoundException
 import java.io.IOException
 
 import java.util.Locale
+import kotlin.math.exp
 
 
 private const val FILE_NAME = "expenses.txt"
@@ -107,13 +108,13 @@ class MainFragment:Fragment(){
                             val selected=currencySpinner.selectedItem.toString().toLowerCase()
 
                             val currenyRate=costs.cad[selected] ?:1.0
-                            val covertedCost=currenyRate * expenseAmount.toDouble()
+                           val convertedCost=currenyRate * expenseAmount.toDouble()
                             val expense = Expense(
                                 expenseName,
                                 expenseAmount,
                                 date.text.toString(),
-                                currency,
-                                covertedCost
+                                Currency.getInstance(currencySpinner.selectedItem.toString()),
+                                convertedCost
                             )
                             expenseList.add(expense)
 
@@ -143,7 +144,7 @@ class MainFragment:Fragment(){
                         expenseName,
                         expenseAmount,
                         date.text.toString(),
-                        currency,
+                        Currency.getInstance(currencySpinner.selectedItem.toString()),
                         expenseAmount.toDouble()
                     )
                     expenseList.add(expense)
@@ -239,6 +240,8 @@ class MainFragment:Fragment(){
             putString("Name", expense.name)
             putString("Amount",expense.amount)
             putString("Date", expense.date)
+            putString("Currency", expense.currency.currencyCode)
+            putString("ConvertedCost", expense.convertedCost.toString())
         }
         findNavController().navigate(R.id.action_mainFragment_to_details,bundle)
     }
