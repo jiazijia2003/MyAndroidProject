@@ -1,5 +1,8 @@
 package com.example.myadroidproject
 
+import retrofit2.http.GET
+
 interface CurrencyApiService {
-    suspend fun getCurrencies():List<Currency>
+    @GET("cad.json")
+    suspend fun getCurrencies():Currency
 }

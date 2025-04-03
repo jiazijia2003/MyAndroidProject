@@ -12,18 +12,17 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="64dp"
         android:layout_marginEnd="185dp"
-        android:layout_marginBottom="623dp"
+        android:layout_marginBottom="32dp"
         android:ems="10"
-        android:inputType="text"
         android:hint="Expense Name"
+        android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/amount"
@@ -32,14 +31,16 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="13dp"
         android:layout_marginEnd="186dp"
-        android:layout_marginBottom="565dp"
+        android:layout_marginBottom="32dp"
         android:ems="10"
-        android:inputType="text"
         android:hint="Expense Amount"
+        android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name" />
+        app:layout_constraintTop_toBottomOf="@+id/name"
+        app:layout_constraintVertical_bias="0.019" />
 
     <TextView
         android:id="@+id/date"
@@ -48,7 +49,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="11dp"
         android:layout_marginEnd="293dp"
-        android:layout_marginBottom="520dp"
+        android:layout_marginBottom="32dp"
         android:text="No date selected"
         android:textSize="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -56,45 +57,41 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/amount"
-        app:layout_constraintVertical_bias="0.0" />
-
-
+        app:layout_constraintVertical_bias="0.017" />
 
     <Button
         android:id="@+id/buttonAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="55dp"
-        android:layout_marginTop="12dp"
         android:layout_marginEnd="56dp"
-        android:layout_marginBottom="456dp"
+        android:layout_marginBottom="392dp"
         android:width="100dp"
         android:text="Add to List"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.01"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
 
-        app:layout_constraintVertical_bias="0.0" />
+        />
 
     <Button
         android:id="@+id/buttonTip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="101dp"
-        android:layout_marginTop="15dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginBottom="453dp"
+        android:layout_marginBottom="396dp"
         android:text="Finacial Tips"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/buttonAdd"
-    />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/buttonAdd" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="400dp"
-        android:layout_height="400dp"
+        android:layout_height="300dp"
 
         android:layout_marginStart="1dp"
         android:layout_marginEnd="10dp"
@@ -110,22 +107,32 @@
         android:id="@+id/checkBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="61dp"
-        android:layout_marginEnd="26dp"
-        android:layout_marginBottom="121dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="236dp"
+        android:layout_marginBottom="51dp"
+
         android:text="Conversion Needed"
-        app:layout_constraintBottom_toTopOf="@+id/buttonTip"
+        app:layout_constraintBottom_toTopOf="@+id/buttonAdd"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/name"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/currencySpinner"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Spinner
         android:id="@+id/currencySpinner"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="11dp"
-        app:layout_constraintBottom_toTopOf="@+id/date"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_marginStart="7dp"
+
+        android:layout_marginBottom="94dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonTip"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

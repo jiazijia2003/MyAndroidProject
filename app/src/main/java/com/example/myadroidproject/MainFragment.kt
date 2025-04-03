@@ -21,11 +21,16 @@ import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.crashlytics.buildtools.reloc.com.google.common.reflect.TypeToken
 import com.google.gson.Gson
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.IOException
@@ -89,28 +94,71 @@ class MainFragment:Fragment(){
             val expenseAmount=amount.text.toString()
             val currency=Currency.getInstance(currencySpinner.selectedItem.toString())
             val isNeedConverted=checkbox.isChecked
-            val convertedValue=0.0
+
             if(isNeedConverted){
-                convertedValue=
-            }else{
-                convertedValue=expenseAmount.toDouble()
-            }
-            if(expenseName.isEmpty()||expenseAmount.isEmpty()||expenseAmount.toDoubleOrNull()==null){
-              Toast.makeText(requireContext(),"Invalid input",Toast.LENGTH_SHORT).show()
-            }else{
-                val expense=Expense(expenseName,expenseAmount,date.text.toString(),currency,isNeedConverted)
-                expenseList.add(expense)
+                lifecycleScope.launch {
+                    try {
+                        val costs= withContext(Dispatchers.IO){
+                            RetrofitInstance.api.getCurrencies()
+                        }
+                        if(costs.cad.isNotEmpty()){
+                            //first i have to get the currency letters from the spinner
+                            //then i use the currency letter to match the rate from the api json and return it
+                            val selected=currencySpinner.selectedItem.toString().toLowerCase()
 
-                expenseAdapter.notifyItemInserted(expenseList.size-1)
-                saveExpensesToFile(requireContext(),expenseList)
+                            val currenyRate=costs.cad[selected] ?:1.0
+                            val covertedCost=currenyRate * expenseAmount.toDouble()
+                            val expense = Expense(
+                                expenseName,
+                                expenseAmount,
+                                date.text.toString(),
+                                currency,
+                                covertedCost
+                            )
+                            expenseList.add(expense)
+
+                            expenseAdapter.notifyItemInserted(expenseList.size - 1)
+                            saveExpensesToFile(requireContext(), expenseList)
+                            name.text.clear()
+                            amount.text.clear()
+                            showTotal()
+
+                            val message="${selected} ${currenyRate}"
+                            Snackbar.make(requireView(), message, Snackbar.LENGTH_LONG).show()
+                        }else{
+                            Snackbar.make(requireView(), "No currency found", Snackbar.LENGTH_SHORT).show()
+                        }
+
+                    } catch (e: Exception) {
+                        Snackbar.make(requireView(), "Error: ${e.message}", Snackbar.LENGTH_SHORT).show()
+                    }
+                }
+            }else {
+               // convertedValue = expenseAmount.toDouble()
+
+                if (expenseName.isEmpty() || expenseAmount.isEmpty() || expenseAmount.toDoubleOrNull() == null) {
+                    Toast.makeText(requireContext(), "Invalid input", Toast.LENGTH_SHORT).show()
+                } else {
+                    val expense = Expense(
+                        expenseName,
+                        expenseAmount,
+                        date.text.toString(),
+                        currency,
+                        expenseAmount.toDouble()
+                    )
+                    expenseList.add(expense)
+
+                    expenseAdapter.notifyItemInserted(expenseList.size - 1)
+                    saveExpensesToFile(requireContext(), expenseList)
 
 
-            }
-            name.text.clear()
-            amount.text.clear()
-           showTotal()
+                }
+                name.text.clear()
+                amount.text.clear()
+                showTotal()
 //            Handler(Looper.getMainLooper()).postDelayed({showTotal()},500)
-          //  view.postDelayed({ showTotal() }, 300)
+                //  view.postDelayed({ showTotal() }, 300)
+            }
         }
         tipBtn.setOnClickListener{
                 val url =
@@ -205,7 +253,29 @@ class MainFragment:Fragment(){
 //            footerFragment.getTotal(total)
 //        }
     }
+    private fun fetchCostConversion(){
+        lifecycleScope.launch {
+            try {
+                val costs= withContext(Dispatchers.IO){
+                    RetrofitInstance.api.getCurrencies()
+                }
+                if(costs.cad.isNotEmpty()){
+                   //first i have to get the currency letters from the spinner
+                    //then i use the currency letter to match the rate from the api json and return it
+                    val selected=currencySpinner.selectedItem.toString().toLowerCase(Locale.ROOT)
 
+                    val currenyRate=costs.cad[selected]
+                    val message="${selected} ${currenyRate}"
+                    Snackbar.make(requireView(), message, Snackbar.LENGTH_LONG).show()
+                }else{
+                    Snackbar.make(requireView(), "No currency found", Snackbar.LENGTH_SHORT).show()
+                }
+
+            } catch (e: Exception) {
+                Snackbar.make(requireView(), "Error: ${e.message}", Snackbar.LENGTH_SHORT).show()
+            }
+        }
+    }
 
 
 //    override fun onStart() {
