@@ -107,15 +107,16 @@ class MainFragment:Fragment(){
                         if(costs.cad.isNotEmpty()){
                             //first i have to get the currency letters from the spinner
                             //then i use the currency letter to match the rate from the api json and return it
-                            val selected=currencySpinner.selectedItem.toString()
+                            val selected=currencySpinner.selectedItem.toString().toLowerCase()
                             Log.d("currency",selected)
                             val currenyRate=costs.cad[selected] ?:1.0
+                            Log.d("c",currenyRate.toString())
                            val convertedCost=currenyRate * expenseAmount.toDouble()
                             val expense = Expense(
                                 expenseName,
                                 expenseAmount,
                                 date.text.toString(),
-                                currency,
+                                currency.currencyCode,
                                 convertedCost
                             )
                             expenseList.add(expense)
@@ -146,7 +147,7 @@ class MainFragment:Fragment(){
                         expenseName,
                         expenseAmount,
                         date.text.toString(),
-                        currency,
+                        currency.currencyCode,
                         expenseAmount.toDouble()
                     )
                     expenseList.add(expense)
@@ -245,7 +246,7 @@ class MainFragment:Fragment(){
             putString("Name", expense.name)
             putString("Amount",expense.amount)
             putString("Date", expense.date)
-            putString("Currency", expense.currency.currencyCode)
+            putString("Currency", expense.currency)
             putString("ConvertedCost", expense.convertedCost.toString())
         }
         findNavController().navigate(R.id.action_mainFragment_to_details,bundle)
