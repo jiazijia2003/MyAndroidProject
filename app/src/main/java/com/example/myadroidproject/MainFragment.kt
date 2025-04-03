@@ -28,6 +28,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.crashlytics.buildtools.reloc.com.google.common.reflect.TypeToken
 import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -114,7 +115,7 @@ class MainFragment:Fragment(){
                                 expenseName,
                                 expenseAmount,
                                 date.text.toString(),
-                               currency,
+                                currency,
                                 convertedCost
                             )
                             expenseList.add(expense)
@@ -190,6 +191,7 @@ class MainFragment:Fragment(){
 
  fun saveExpensesToFile(context: Context, taskList: List<Expense>) {
     try {
+
         val json = Gson().toJson(taskList)
         context.openFileOutput(FILE_NAME, Context.MODE_PRIVATE).use { output ->
             output.write(json.toByteArray())
@@ -243,7 +245,7 @@ class MainFragment:Fragment(){
             putString("Name", expense.name)
             putString("Amount",expense.amount)
             putString("Date", expense.date)
-            putString("Currency", expense.currency.toString())
+            putString("Currency", expense.currency.currencyCode)
             putString("ConvertedCost", expense.convertedCost.toString())
         }
         findNavController().navigate(R.id.action_mainFragment_to_details,bundle)
