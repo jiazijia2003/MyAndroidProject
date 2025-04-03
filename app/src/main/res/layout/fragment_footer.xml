@@ -7,9 +7,10 @@
 
     <TextView
         android:id="@+id/footerTV"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="32dp"
+        android:textAlignment="center"
         android:background="@android:color/holo_red_light"
         android:text="Total Expense:"
         android:textSize="30dp"

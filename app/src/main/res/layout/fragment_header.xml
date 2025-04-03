@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:text="Lujia's Expense"
         android:textAlignment="center"
+       android:textColor="@color/cardview_dark_background"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

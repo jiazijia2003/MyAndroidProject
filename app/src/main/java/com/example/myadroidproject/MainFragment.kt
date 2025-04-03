@@ -91,9 +91,10 @@ class MainFragment:Fragment(){
        // footerFragment =FooterFragment()
         //start give functions to buttons
         addBtn.setOnClickListener{
+
             val expenseName=name.text.toString()
             val expenseAmount=amount.text.toString()
-            val currency=Currency.getInstance(currencySpinner.selectedItem.toString())
+            val currency=Currency.getInstance(currencySpinner.selectedItem.toString().uppercase())
             val isNeedConverted=checkbox.isChecked
 
             if(isNeedConverted){
@@ -105,15 +106,15 @@ class MainFragment:Fragment(){
                         if(costs.cad.isNotEmpty()){
                             //first i have to get the currency letters from the spinner
                             //then i use the currency letter to match the rate from the api json and return it
-                            val selected=currencySpinner.selectedItem.toString().toLowerCase()
-
+                            val selected=currencySpinner.selectedItem.toString()
+                            Log.d("currency",selected)
                             val currenyRate=costs.cad[selected] ?:1.0
                            val convertedCost=currenyRate * expenseAmount.toDouble()
                             val expense = Expense(
                                 expenseName,
                                 expenseAmount,
                                 date.text.toString(),
-                                Currency.getInstance(currencySpinner.selectedItem.toString()),
+                               currency,
                                 convertedCost
                             )
                             expenseList.add(expense)
@@ -144,7 +145,7 @@ class MainFragment:Fragment(){
                         expenseName,
                         expenseAmount,
                         date.text.toString(),
-                        Currency.getInstance(currencySpinner.selectedItem.toString()),
+                        currency,
                         expenseAmount.toDouble()
                     )
                     expenseList.add(expense)
@@ -211,6 +212,7 @@ class MainFragment:Fragment(){
             taskList.addAll(loadedTasks)
 
             Log.d("FileStorage", "Tasks loaded successfully")
+            Log.d("FileStorage", loadedTasks.toString())
         } catch (e: FileNotFoundException) {
             Log.e("FileStorage", "File not found: ${e.message}")
         } catch (e: IOException) {
@@ -236,14 +238,17 @@ class MainFragment:Fragment(){
     }
     fun getDetails(index:Int){
         val expense=expenseList[index]
+
         val bundle=Bundle().apply {
             putString("Name", expense.name)
             putString("Amount",expense.amount)
             putString("Date", expense.date)
-            putString("Currency", expense.currency.currencyCode)
+            putString("Currency", expense.currency.toString())
             putString("ConvertedCost", expense.convertedCost.toString())
         }
         findNavController().navigate(R.id.action_mainFragment_to_details,bundle)
+        saveExpensesToFile(requireContext(), expenseList)
+      //  Log.d("InGetDetails", "expense.currency.toString()")
     }
     fun showTotal() {
         val total = expenseList.sumOf { it.amount.toDoubleOrNull() ?: 0.0 }
@@ -251,7 +256,7 @@ class MainFragment:Fragment(){
         (activity as? MainActivity)?.updateTotal(total)
 //        footerFragment?.getTotal(total)
 //        if (footerFragment == null) {
-//            Log.d("MainFragment", "footerFragment 是 null，无法调用getTotal！")
+//
 //        } else {
 //            footerFragment.getTotal(total)
 //        }

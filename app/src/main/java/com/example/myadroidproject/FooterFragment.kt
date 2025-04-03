@@ -28,7 +28,7 @@ private lateinit var totalTV:TextView
 
     fun getTotal(total:Double){
 
-        totalTV.text="Total Expenses: ${total}"
+        totalTV.text="Total Expenses: CAD${total}"
 
 
     }
