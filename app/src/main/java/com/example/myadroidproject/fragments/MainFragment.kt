@@ -27,7 +27,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myadroidproject.models.Expense
 import com.example.myadroidproject.ExpenseAdapter
-import com.example.myadroidproject.FILE_NAME
+
 import com.example.myadroidproject.MainActivity
 import com.example.myadroidproject.R
 import com.example.myadroidproject.network.RetrofitInstance
@@ -42,6 +42,7 @@ import java.io.FileNotFoundException
 import java.io.IOException
 import java.util.Locale
 
+private const val FILE_NAME = "expenses.txt"
 class MainFragment: Fragment(){
     private lateinit var recyclerView: RecyclerView
     private lateinit var footerFragment: FooterFragment
