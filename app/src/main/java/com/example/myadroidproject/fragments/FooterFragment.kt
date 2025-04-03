@@ -1,12 +1,12 @@
-package com.example.myadroidproject
+package com.example.myadroidproject.fragments
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.example.myadroidproject.R
 
 class FooterFragment:Fragment() {
 private lateinit var totalTV:TextView

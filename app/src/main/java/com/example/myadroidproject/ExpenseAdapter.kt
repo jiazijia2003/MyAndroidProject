@@ -1,16 +1,15 @@
 package com.example.myadroidproject
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myadroidproject.fragments.MainFragment
+import com.example.myadroidproject.models.Expense
 
-class ExpenseAdapter(private var expenseList:MutableList<Expense>,private var context: Context,private val activity: MainFragment):RecyclerView.Adapter<RecycleViewHolder>(){
+class ExpenseAdapter(private var expenseList:MutableList<Expense>, private var context: Context, private val activity: MainFragment):RecyclerView.Adapter<RecycleViewHolder>(){
 
    //inner  class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
 //interface ExpenseListener{

@@ -1,4 +1,4 @@
-package com.example.myadroidproject
+package com.example.myadroidproject.fragments
 
 import android.annotation.SuppressLint
 import android.icu.util.Currency
@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import org.w3c.dom.Text
+import com.example.myadroidproject.R
 
 @Suppress("UNREACHABLE_CODE")
 class ExpenseDetailsFragment :Fragment(){

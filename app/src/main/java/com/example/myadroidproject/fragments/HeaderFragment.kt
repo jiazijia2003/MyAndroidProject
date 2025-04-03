@@ -1,10 +1,11 @@
-package com.example.myadroidproject
+package com.example.myadroidproject.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.myadroidproject.R
 
 class HeaderFragment:Fragment() {
 

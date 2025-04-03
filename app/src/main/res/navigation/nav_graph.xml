@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.example.myadroidproject.MainFragment"
+        android:name="com.example.myadroidproject.fragments.MainFragment"
         android:label="Expense List"
         tools:layout="@layout/fragment_main">
 
@@ -20,7 +20,7 @@
     </fragment>
     <fragment
     android:id="@+id/details"
-    android:name="com.example.myadroidproject.ExpenseDetailsFragment"
+    android:name="com.example.myadroidproject.fragments.ExpenseDetailsFragment"
     android:label="Expense Details"
     tools:layout="@layout/fragement_details" />
     <action

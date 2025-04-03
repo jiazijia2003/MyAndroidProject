@@ -1,6 +1,5 @@
-package com.example.myadroidproject
+package com.example.myadroidproject.models
 
-import android.icu.util.Currency
 import java.io.Serializable
 
 data class Expense (val name:String,

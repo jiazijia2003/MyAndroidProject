@@ -115,7 +115,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentheader"
-        android:name="com.example.myadroidproject.HeaderFragment"
+        android:name="com.example.myadroidproject.fragments.HeaderFragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
@@ -126,7 +126,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentfooter"
-        android:name="com.example.myadroidproject.FooterFragment"
+        android:name="com.example.myadroidproject.fragments.FooterFragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"

@@ -2,12 +2,10 @@ package com.example.myadroidproject
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import org.w3c.dom.Text
+import com.example.myadroidproject.models.Expense
 
 @Suppress("DEPRECATION")
 class DetailPageActivity:AppCompatActivity() {

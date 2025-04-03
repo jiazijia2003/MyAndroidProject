@@ -1,4 +1,4 @@
-package com.example.myadroidproject
+package com.example.myadroidproject.models
 
 import java.io.Serializable
 

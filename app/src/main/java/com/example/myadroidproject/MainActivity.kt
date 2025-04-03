@@ -1,22 +1,14 @@
 package com.example.myadroidproject
 
 import android.app.DatePickerDialog
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.text.TextUtils.replace
 import android.util.Log
-import android.widget.Button
 import android.widget.DatePicker
-import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.example.myadroidproject.fragments.FooterFragment
+import com.example.myadroidproject.fragments.HeaderFragment
 import java.text.DateFormat
 import java.util.Calendar
 
@@ -133,7 +125,7 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener{
 //    .commit()   from documentation
     private fun addFragmentH(){
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fragmentheader,HeaderFragment())
+            .replace(R.id.fragmentheader, HeaderFragment())
             .commit()
     }
 
